@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\inputsRequest;
 use App\Models\todos;
 use Illuminate\Http\Request;
 
@@ -20,17 +21,16 @@ class todosController extends Controller
     function create(){
         return view('create');
     }
-   function store(){
-    $this->validate(request(),[
-        'name'=>'required|unique:todos,name',
-        'description'=>'required',
-    ]);
-    $data=request()->all();
+   function store(inputsRequest $request){
+   if($request->validated())
+    {
+        $data=request()->all();
     $todo=new todos();
     $todo->name = $data['name'];
     $todo->description = $data['description'];
     $todo->completed=false;
     $todo->save();
+    }
     return redirect('/');
    }
    
