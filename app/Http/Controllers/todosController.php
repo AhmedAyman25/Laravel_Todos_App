@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class todosController extends Controller
 {
     function index(){
-        $todos=todos::all();
+        $todos = todos::all();
         return view('todos', compact('todos'));
     }
 
